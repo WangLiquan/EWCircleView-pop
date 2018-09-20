@@ -25,7 +25,7 @@
 3.添加旋转方法.
 
 
-![效果图预览](https://github.com/WangLiquan/EWCircleView+pop/raw/master/images/demonstration.gif)
+![效果图预览](https://github.com/WangLiquan/EWCircleView-pop/raw/master/images/demonstration.gif)
 
 # 另:
 也有使用transform,通过获取touchMove手势来旋转的类似效果.项目为[CircleView](https://github.com/WangLiquan/CircleView),可供参考.
