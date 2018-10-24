@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     ///监听器,当长按中间按钮时监听subView的即时layer.不按时暂停
     private lazy var displayLink: CADisplayLink = {
         let displayLink = CADisplayLink(target: self, selector: #selector(displayLinkCallback))
-        displayLink.add(to: RunLoop.current, forMode: .commonModes)
+        displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
         return displayLink
     }()
     ///周围subView的数据
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
         ///使动画重复
         animation.repeatCount = Int(MAXPRI)
         ///动画线性匀速展示
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         ///将动画添加到contentView.layer
         self.contentView?.layer.pop_add(animation, forKey: "rotation")
 
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
         ///给一个相同速度来实现中心view不动
         subAnimation.duration = 32
         subAnimation.repeatCount = Int(MAXPRI)
-        subAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        subAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         ///将动画添加到circleView.layer
         self.circleView?.layer.pop_add(subAnimation, forKey: "subRotation")
         ///监听子view.frame的监听器暂停
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
                 ///使用tag标记确认其已被放大,防止重复放大,样式改变
                 subView.tag = 1
                 ///将放大的View提到最上方,保证展示效果
-                subView.bringSubview(toFront: subView)
+                subView.bringSubviewToFront(subView)
                 self.circleView?.image = subView.imageView.image
             }
         }
@@ -188,7 +188,7 @@ class ViewController: UIViewController {
                 ///将不在条件中的View恢复原样
                 subView.transform = subView.transform.scaledBy(x: 1/1.5, y: 1/1.5)
                 subView.tag = 0
-                contentView?.sendSubview(toBack: subView)
+                contentView?.sendSubviewToBack(subView)
             }
         }
     }
