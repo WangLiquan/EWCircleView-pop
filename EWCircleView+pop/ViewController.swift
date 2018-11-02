@@ -60,9 +60,9 @@ class ViewController: UIViewController {
     }
     /// 添加中间圆形view
     private func setCircleView(){
-        let view = UIImageView(frame: CGRect(x: 0.5 * CGFloat(1 - PROPORTION) * ScreenInfo.Width + 10, y: 0.5 * CGFloat(1 - PROPORTION) * ScreenInfo.Width + 10, width: ScreenInfo.Width * CGFloat(PROPORTION) - 20, height: ScreenInfo.Width * CGFloat(PROPORTION) - 20))
+        let view = UIImageView()
         /// 为了适配保证size变化center不变
-        let centerPoint = view.center
+        let centerPoint = CGPoint(x: ScreenInfo.Width / 2, y: ScreenInfo.Width / 2)
         view.frame.size = CGSize(width: ScreenInfo.Width * CGFloat(PROPORTION) - 40, height: ScreenInfo.Width * CGFloat(PROPORTION) - 40)
         view.center = centerPoint
         view.image = UIImage(named: "11")
@@ -89,6 +89,7 @@ class ViewController: UIViewController {
             let x = contentRadius * CGFloat(sin(.pi * 2 / Double(subnode.count) * Double(i)))
             let y = contentRadius * CGFloat(cos(.pi * 2 / Double(subnode.count) * Double(i)))
             // 当子view数量大于10个,view.size变小,防止view偏移,要保证view.center不变.
+            // 先不计缩放比例计算出frame,获取center.之后保证center不变,修改View.size.保证展示效果.
             let view = EWSubView(frame: CGRect(x:contentRadius + 0.5 * CGFloat((1 + PROPORTION)) * x - 0.5 * CGFloat((1 - PROPORTION)) * contentRadius, y: contentRadius - 0.5 * CGFloat(1 + PROPORTION) * y - 0.5 * CGFloat(1 - PROPORTION) * contentRadius, width: CGFloat((1 - PROPORTION)) * contentRadius, height: CGFloat((1 - PROPORTION)) * contentRadius), imageName: subnode[i])
             let centerPoint = view.center
             view.frame.size = CGSize(width: CGFloat((1 - PROPORTION)) * contentRadius / scale , height: CGFloat((1 - PROPORTION)) * contentRadius / scale)
