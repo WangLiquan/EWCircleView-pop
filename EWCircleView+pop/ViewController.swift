@@ -18,7 +18,7 @@ struct ScreenInfo {
         return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
     }
     static private func navBarHeight() -> CGFloat {
-        return isIphoneX() ? 88 : 64;
+        return isIphoneX() ? 88 : 64
     }
 }
 
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         contentView!.addSubview(circleView!)
     }
     /// 添加中间圆形view
-    private func setCircleView(){
+    private func setCircleView() {
         let view = UIImageView()
         /// 为了适配保证size变化center不变
         let centerPoint = CGPoint(x: ScreenInfo.Width / 2, y: ScreenInfo.Width / 2)
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     }
     /// 布局旋转的子view
     private func rotationCircleCenter(contentOrgin: CGPoint,
-                                      contentRadius: CGFloat,subnode: [String]){
+                                      contentRadius: CGFloat,subnode: [String]) {
         // 添加比例,实现当要添加的子view数量较多时候可以自适应大小.
         var scale: CGFloat = 1
         if subnode.count > 10 {
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         self.rotationCircleCenter(contentOrgin: CGPoint(x: MENURADIUS, y: MENURADIUS), contentRadius: MENURADIUS,subnode:subArray)
     }
     ///contentView点击中心自动旋转方法
-    @objc func autoRotateContentView(){
+    @objc func autoRotateContentView() {
         ///先添加整体背景旋转动画
         let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerRotation)
         ///旋转角度,给一个大的数字优化体验,防止卡顿
@@ -154,10 +154,10 @@ class ViewController: UIViewController {
     }
     ///不再点击中心View时,将动画移除.
     ///之前尝试使用CABasicAnimation,发现其只修改layer.frame,并不修改View.frame,所以当移除动画或者会View.frame返回原处,或者就是layer与frame不同,导致View错位展示效果与功能效果不匹配.所以尝试使用faceBook的pop框架.
-    @objc func endRotateContentView(){
+    @objc func endRotateContentView() {
         contentView?.layer.pop_removeAllAnimations()
         circleView?.layer.pop_removeAllAnimations()
-        for subView in viewArray{
+        for subView in viewArray {
             subView.layer.pop_removeAllAnimations()
         }
         ///将监听器暂停
@@ -168,13 +168,13 @@ class ViewController: UIViewController {
     /// - Parameters:
     ///   - subView: subView
     ///   - bounds: 如果是长按动画进入的是subview.layer.presentation().bounds,手动滑动则是subView.bounds,需要根据bounds来                        计算subView在当前页面的frame
-    func changeBottomSubView(subView: EWSubView, bounds: CGRect){
+    func changeBottomSubView(subView: EWSubView, bounds: CGRect) {
         ///获取view在当前页面的实际frame
         let rect = subView.convert(bounds, to: UIApplication.shared.keyWindow)
         let viewCenterX = rect.origin.x + (rect.width) / 2
         ///当View在页面中心线附近,并且处于下方时使用transform将其放大,并将中心imageView.image修改
         if viewCenterX > self.view.center.x - 20 && viewCenterX < self.view.center.x + 20 && rect.origin.y > (contentView?.center.y)! {
-            if subView.tag == 0{
+            if subView.tag == 0 {
                 subView.transform = subView.transform.scaledBy(x: 1.5, y: 1.5)
                 ///使用tag标记确认其已被放大,防止重复放大,样式改变
                 subView.tag = 1
@@ -182,8 +182,7 @@ class ViewController: UIViewController {
                 subView.bringSubviewToFront(subView)
                 self.circleView?.image = subView.imageView.image
             }
-        }
-        else {
+        } else {
             ///如果subView在变大状态
             if subView.tag == 1 {
                 ///将不在条件中的View恢复原样
@@ -198,7 +197,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 class EWSubView: UIView {
@@ -216,10 +214,9 @@ class EWSubView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func drawSubView(){
+    func drawSubView() {
         self.layer.cornerRadius = self.frame.width / 2
         self.imageView.frame = CGRect(x: 0, y:0 , width: self.frame.width, height: self.frame.width)
     }
 
 }
-
