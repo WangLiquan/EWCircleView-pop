@@ -1,5 +1,7 @@
 # EWCircleView-pop
-<h3>Swift轮转动画</h3>
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
+Swift轮转动画
 
 # 实现效果: 
 静止时:子view对称排列,允许动态添加,0~24个都能较好的显示.
