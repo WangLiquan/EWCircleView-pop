@@ -20,11 +20,11 @@ Swift轮转动画
 
 # 实现方式:
 
-1.添加背景透明view,中心圆圈view.
+1. 添加背景透明view,中心圆圈view.
 
-2.添加周围旋转子view.
+2. 添加周围旋转子view.
 
-3.添加旋转方法.
+3. 添加旋转方法.
 
 
 ![效果图预览](https://github.com/WangLiquan/EWCircleView-pop/raw/master/image/demonstration.gif)
